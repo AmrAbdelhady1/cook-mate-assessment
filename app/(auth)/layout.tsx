@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
+import "../globals.css";
+import AuthHeader from "@/components/AuthHeader";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
 });
 const natasha = localFont({
-  src: "../public/assets/fonts/Natasha-Walker.otf",
+  src: "../../public/assets/fonts/Natasha-Walker.otf",
   variable: "--font-natasha",
 });
 const cochon = localFont({
-  src: "../public/assets/fonts/Petit-Cochon.ttf",
+  src: "../../public/assets/fonts/Petit-Cochon.ttf",
   variable: "--font-cochon",
 });
 
@@ -27,12 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`${montserrat.variable} ${natasha.variable} ${cochon.variable} font-montserrat`}
-      >
-        <main>{children}</main>
-      </body>
-    </html>
+    <div
+      className={`${montserrat.variable} ${natasha.variable} ${cochon.variable} font-montserrat ml-[160px]`}
+    >
+      <AuthHeader />
+      <main>{children}</main>
+    </div>
   );
 }

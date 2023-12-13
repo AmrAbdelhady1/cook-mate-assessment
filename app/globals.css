@@ -2,26 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer utilities {
+  .auth-header {
+    @apply text-[57px] font-bold leading-[85.5px] font-natasha tracking-[2px];
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  .auth-text {
+    @apply text-[28px] leading-[42px];
+  }
+  .auth-label {
+    @apply text-[19px] leading-[28.5px] mb-3 text-[#212529];
+  }
+  .auth-input {
+    @apply w-full max-w-[430px] h-[50px] px-[16.67px] flex items-center rounded-full border border-dark 
+    text-opacity-50 focus:outline-none focus:border-primary mb-6;
+  }
+  .auth-button {
+    @apply w-full max-w-[430px] my-8 rounded-full bg-secondary flex items-center justify-center gap-[14px] 
+    h-[55px] text-white text-[19px] font-bold uppercase leading-[28.5px] hover:scale-110 ease-in-out duration-700;
+  }
+  .auth-link {
+    @apply hover:underline hover:underline-offset-[3px];
+  }
+  .auth-error {
+    @apply text-red-500 mx-10;
+  }
 }
