@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { signIn } from "next-auth/react";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginSchema = Yup.object().shape({
   name: Yup.string().required("Username is required"),
@@ -53,17 +55,38 @@ const Register = () => {
       password: "",
       confirmPassword: "",
     },
-    // enableReinitialize: true,
     validationSchema: LoginSchema,
     onSubmit: () => handleSubmit(),
   });
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify({
+          email: formik.values.email,
+          password: formik.values.password,
+          username: formik.values.name,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.ok) {
+        signIn();
+      } else {
+        toast.error("email is already taken");
+      }
+    } catch (error: any) {
+      // setError(error?.message)
+    }
+  };
   return (
     <form
       onSubmit={formik.handleSubmit}
       className="flex w-full justify-between gap-[110px] text-dark"
     >
+      <Toaster position="top-right" />
       <div className="w-full">
         <h1 className="auth-header">Join the CookMate Community!</h1>
         <p className="auth-text">Create your account</p>
